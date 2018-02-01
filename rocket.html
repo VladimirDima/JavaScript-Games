@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Launch a rocket!</title>
+<style type="text/css">
+#space {
+	width: 100vw;
+	text-align: center;
+}
+#rocket {
+	width: inherit;
+	position: absolute;
+	bottom: 0px;
+}
+</style>
+</head>
+
+<body>
+<button id="trigger">Launch the Rocket!</button>
+<div id="space">
+  <div id="rocket"><img src="rocket.png" height="120" alt="space rocket"/></div>
+</div>
+<script type="text/javascript">
+	
+	//scope (extent or range of view) : Global
+	//There are no access modifiers in javascript 
+	var rocket = document.getElementById("rocket"); 
+	var trigger = document.getElementById("trigger"); 
+	
+	//looks for an action 
+	//click is an event handler 
+	trigger.addEventListener('click', launchRocket);
+	
+	function launchRocket() {
+		
+ //    alert ('Get inspired ;-\): https://www.w3schools.com/howto/howto_js_animate.asp');
+	// location.href = "https://www.w3schools.com/howto/howto_js_animate.asp";
+
+	
+	
+	}
+	
+</script>
+</body>
+</html>
