@@ -3,11 +3,30 @@
 <head>
 <meta charset="utf-8">
 <title>Simple Quiz with arrays</title>
-
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
-
+<style>
+	body {
+		background: #71BA51;
+	}
+	
+	.cont {
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		margin-top: 25%;
+	}
+	#message {
+		color: #fff;
+		font-family: 'Raleway', sans-serif;
+		font-size: 50px;
+		font-weight: 600;
+	}
+</style>
 <body>
-<p id="message">Here you will see the results.</p>
+<div class="cont">
+	<p id="message">Here you will see the results.</p>
+</div>
 <script type="text/javascript">
 	
 	var questions = [							 
@@ -39,18 +58,6 @@
 	}
 
 	userInput();
-	
-	/****************************
-	
-	Create a quiz based on the array "questions" ['question', correct answer].
-	Each question must be presented using the prompt() method, allow user input and provide feedback using alert() - either "Correct!" or "Sorry. The correct answer is [correct number].)
-	
-	After the quiz is finished the overall result is published: "You got [number of correct answered questions] out of [questions in total] questions correct!"
-	
-	Additional challenge: 
-	Use the JSON file 01_quiz.json as data source instead of the default array.
-	
-	****************************/
 		
 </script>
 </body>
