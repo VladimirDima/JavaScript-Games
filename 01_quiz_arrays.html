@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Simple Quiz with arrays</title>
+
+</head>
+
+<body>
+<p id="message">Here you will see the results.</p>
+<script type="text/javascript">
+	
+	var questions = [							 
+		['How many moons does Earth have?', 1],					 
+		['How many moons does Saturn have?', 31],
+		['How many moons does Venus have?', 0]	
+	];
+
+	var correct = 0;
+
+	function userInput() {
+		
+		// var question1 = parseInt(prompt(questions[0][0]));
+		// var question2 = parseInt(prompt(questions[1][0]));
+		// var question3 = parseInt(prompt(questions[2][0]));
+
+		for (var i = 0; i < questions.length; i++) {
+			var answer = prompt(questions[i][0]);
+			if (answer == questions[i][1]) {
+				alert("Correct! The answer is: " + questions[i][1]);
+				correct++;
+			}
+			else {
+				alert("Incorrect! The correct answer was: " + questions[i][1]);
+			}
+
+			message.innerHTML = 'You have answered correctly ' + correct + ' question/s out of 3!';
+		}
+	}
+
+	userInput();
+	
+	/****************************
+	
+	Create a quiz based on the array "questions" ['question', correct answer].
+	Each question must be presented using the prompt() method, allow user input and provide feedback using alert() - either "Correct!" or "Sorry. The correct answer is [correct number].)
+	
+	After the quiz is finished the overall result is published: "You got [number of correct answered questions] out of [questions in total] questions correct!"
+	
+	Additional challenge: 
+	Use the JSON file 01_quiz.json as data source instead of the default array.
+	
+	****************************/
+		
+</script>
+</body>
+</html>
