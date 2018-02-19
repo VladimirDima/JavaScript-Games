@@ -3,7 +3,7 @@ var myGame = (function () {
     
     // private variables
     
-    var = playerChoiceDisplay = document.getElementById("player_choice");
+    var playerChoiceDisplay = document.getElementById("player_choice");
     var computerChoiceDisplay = document.getElementById("computer_choice");
     var resultDisplay = document.getElementById("result");
     
