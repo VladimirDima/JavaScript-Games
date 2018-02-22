@@ -1,5 +1,5 @@
 var myGame = (function () {
-    "use strict"
+    "use strict";
     
     // private variables
     
@@ -7,9 +7,7 @@ var myGame = (function () {
     var computerChoiceDisplay = document.getElementById("computer_choice");
     var resultDisplay = document.getElementById("result");
     
-    var userChoice = "";
-    var computerChoice = "";
-    var result = "";
+    var userChoice, computerChoice;
     
     var computerInput;
     var compare;
@@ -18,7 +16,7 @@ var myGame = (function () {
    
     
     computerInput = function(){
-        switch(Math.floor(math.random()*3)){
+        switch(Math.floor(Math.random()*3)){
             case 0:
                 computerChoice = "Rock";
                 break;
@@ -56,8 +54,10 @@ var myGame = (function () {
     display = function(){
         playerChoiceDisplay.innerHTML = userChoice;
         computerChoiceDisplay.innerHTML = computerChoice;
-    };
+    }};
 	
+    //public function 
+
 	return {
           
         play: function(){
@@ -68,12 +68,14 @@ var myGame = (function () {
         }
 	};
         
+    //gameModule end
+
 })();
     
     var buttons = document.getElementsByClassName("button");
     for (var i = 0; i < buttons.length; i++){
-        buttons[i].addEventListener('click', play);
+        buttons[i].addEventListener('click', myGame.play);
     }
 
-myGame.myPublicFunction();
-myGame.play();
+
+// myGame.play(); we dont need to call this since we are calling it on click
