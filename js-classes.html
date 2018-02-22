@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Launch a Rocket (ECMA class syntax)</title>
+<script type="text/javascript">
+	
+	class Rocket {
+		
+		// The constructor method is a special method for creating and initializing an object created with a class. 
+		constructor(description, engines){
+				this.description = description;
+				this.engines = engines;
+				this.fuel = 0; // calculate as gallons, input is liter
+		}
+
+
+		
+		// class method
+		describeYourself(){
+			console.log('I am a ' + this.description + ' with ' + this.engines + ' engines.');
+		}
+
+		// a getter/setter
+		// MDN: A getter binds an object's property to a function that will be called when the property is looked up.
+		get tank() {
+			return 'Tank is filled with ' + this.fuel + ' gallons.'
+		}
+
+		// MDN: binds an object's property to a function to be called when there is an attempt to set the property
+		set tank(liter) {
+			//liter-gallon conversion
+			var gal = liter * 0.264272;
+			this.fuel = gal;
+		}
+		
+		// static class method
+		static distressSignal () {
+			console.log('Houston, we have a problem!');
+		}
+
+	// class end	
+	}
+
+	// INHERITANCE: Creating a sub-class extending rocket 
+
+	class Saturn extends Rocket {
+
+		constructor(){
+			// refering to the super class constructor "Rocket" and passing the arguments	
+			super("Saturn V", 4); 
+			// aditional class property 
+			this.enginetype = 'F-1';
+		}
+
+		// overriding the describe yourself method method
+		describeYourself(){
+			// keeping functionality from the super class
+			super.describeYourself();
+			console.log('Engine type: ' + this.enginetype);
+		}
+
+		//additional class method
+		addLoad(load){
+			console.log('Load: ' + load);
+		}
+		//sub-class end
+	}
+
+	//instantiating an object
+
+	var coolRocket = new Rocket("Spacecraft", 4);
+	coolRocket.describeYourself();
+
+	//call to getter
+	console.log(coolRocket.tank);
+	coolRocket.tank = 10000;
+	//call to setter 
+	console.log(coolRocket.tank);
+	//call to the static method. You dont need to instantiate the class, it can be directly called 
+	Rocket.distressSignal();
+
+	var mySaturn = new Saturn();
+	mySaturn.describeYourself();
+	mySaturn.addLoad('Lunar roving vehicle');
+</script>
+</head>
+
+<body>
+</body>
+</html>
