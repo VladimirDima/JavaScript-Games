@@ -1,127 +1,120 @@
+// JavaScript Document
 
+class Dice {
 
-if (typeof(Storage) !== "undefined") {
-    if(localStorage.getItem("Name") != null){
-        // Retrieve
-        var PlayerName = localStorage.getItem("Name");
-        var computerPoints = localStorage.getItem("computerPoints");
-        var playerPoints = localStorage.getItem("playerPoints");
-    } else {
-        var playerName = prompt("Name");
-        var computerPoints = 0;
-        var playerPoints = 0;
+    constructor(name) {
+        this.name = name;
+        this.face = 0;
     }
-} else {
-    console.log("No arms, no cake!");
+
+    rollDice() {
+        this.face = Math.ceil((Math.random()) * 6); // returning whole number between 1 - 6
+        console.log(this.name + ': ' + this.face);
+        // printing the result
+        document.getElementById(this.name).innerHTML = this.face;
+    }
+
+    get result() {
+            return this.face;
+        }
+        // END class Dice
 }
 
-var dice1 = 0;
-var dice2 = 0;
-
-var playerResult;
-var playerScore = 0;
-var computerResult;
-var computerScore = 0;
-
-var playerDice1 = document.getElementById("playerDice1");
-var playerDice2 = document.getElementById("playerDice2");
-var computerDice1 = document.getElementById("computerDice1");
-var computerDice2 = document.getElementById("computerDice2");
-
-var playerResultDisplay = document.getElementById("playerResult");
-var playerPoints = document.getElementById("playerPoints");
-var computerResultDisplay = document.getElementById("computerResult");
-var computerPoints = document.getElementById("computerPoints");
-
-var resultScoreDisplay = document.getElementById("resultScore");
-
-var buttonReset = document.getElementById("buttonReset");
-var buttonClear = document.getElementById("buttonClear");
-
-
-
-class Dice{
-
-    constructor(dice1, dice2){
-        this.dice1 = dice1;
-        this.dice2 = dice2;
-    }
-    
-    rollDices(){
-
-        dice1 = (Math.floor(Math.random() *6) +1);
-        dice2 = (Math.floor(Math.random() *6) +1);
-        computerDice1.innerHTML = "Dice 1: " + dice1;
-        computerDice2.innerHTML = "Dice 2: " + dice2;
-    }
-
-    calculate(){
-        computerResult = dice1 + dice2;
-        computerResultDisplay.innerHTML = "Computer Score: " + computerResult;
-    }
-}
-
-var MyDice = new Dice();
-MyDice.rollDices();
-MyDice.calculate();
-
-class Player extends Dice{
+class Player {
+//the practical advantage of using a contructor is the fact that you can define what values are coming 
     constructor() {
-        super();
+        this.name = '';
+        this.diceResult = 0;
+        this.score = 0;
     }
-    
-    rollDices() {
-        dice1 = (Math.floor(Math.random() *6) +1);
-        dice2 = (Math.floor(Math.random() *6) +1);
-        playerDice1.innerHTML = "Dice 1: " + dice1;
-        playerDice2.innerHTML = "Dice 2: " + dice2;
+
+    playerName() {
+        // prepare client storage for user + score if doesn't exist
+        if (!localStorage.getItem('user')) {
+            localStorage.setItem('user', '');
+            localStorage.setItem('userScore', 0);
+        }
+        // prompt for user name if not yet set
+        if (localStorage.getItem('user') === '') {
+            this.name = prompt("Please enter your name", "Mr. X");
+            // set username
+            localStorage.setItem('user', this.name);
+        }
+        // get player name from local storage
+        var playername = localStorage.getItem('user');
+        this.name = playername;
+        this.score = localStorage.getItem('userScore');
+        alert('Hi ' + this.name + ', your all-time score is ' + this.score + '.  Ready to roll?');
+        document.getElementById("pName").innerHTML = this.name;
+        document.getElementById("pScore").innerHTML = this.score;
     }
-    
-    calculate(){
-        playerResult = dice1 + dice2;
-        playerResultDisplay.innerHTML = "Player score: " + playerResult;
+
+    rollDices(id1, id2, output) {
+        let dice1 = new Dice(id1);
+        dice1.rollDice();
+
+        let dice2 = new Dice(id2);
+        dice2.rollDice();
+
+        this.diceResult = dice1.result + dice2.result;
+        document.getElementById(output).innerHTML = this.diceResult;
     }
+
+    get result() {
+            return this.diceResult;
+        }
+        // END class Player
 }
 
+/////////////////
+// GAME LOGIC //
+////////////////
 
+function gameLoop() {
+    'use strict';
 
-var MyPlayer = new Player();
-MyPlayer.rollDices();
-MyPlayer.calculate();
+    document.getElementById('playAgain').addEventListener('click', playAgain);
+    document.getElementById('clearData').addEventListener('click', clearData);
 
-function compare() {
-	'use strict';
-	if (computerResult === playerResult) {
-		console.log("Draw");
-		resultScoreDisplay.innerHTML = "Draw";
-	} else if (computerResult > playerResult) {
-		computerScore++;
-		resultScoreDisplay.innerHTML = "LOSER!";
-		computerPoints.innerHTML = "Computer Points: " + computerScore;
-	} else if (computerResult < playerResult) {
-		playerScore++;
-		resultScoreDisplay.innerHTML = "You Win!";
-		playerPoints.innerHTML = "Player Points: " + playerScore;
-	}
+    var player1 = new Player();
+    player1.playerName();
+    player1.rollDices('dice1', 'dice2', 'pResult');
+
+    var computer = new Player();
+    computer.rollDices('dice3', 'dice4', 'cResult');
+
+    compare();
+
+    function compare() {
+        if (player1.result < computer.result) {
+            computer.score++;
+            document.getElementById("winLoose").innerHTML = 'You loose!';
+            document.getElementById("cScore").innerHTML = computer.score;
+        } else if (player1.result > computer.result) {
+            player1.score++;
+            document.getElementById("winLoose").innerHTML = 'Nice one!';
+            document.getElementById("pScore").innerHTML = player1.score;
+            localStorage.setItem('userScore', player1.score);
+            console.log('Score: ' + player1.score);
+        } else {
+            document.getElementById("winLoose").innerHTML = 'Draw...';
+        }
+    }
+
+    function playAgain() {
+        player1.rollDices('dice1', 'dice2', 'pResult');
+        computer.rollDices('dice3', 'dice4', 'cResult');
+        compare();
+    }
+
+    function clearData() {
+        alert('Do you really want to clear ALL data?');
+        localStorage.clear();
+        location.reload();
+        // Clear all keys
+        // store.clearAll();
+    }
+
 }
 
-compare();
-
-function resetGame(){
-    location.reload();
-}
-
-function clearGame(){
-    localStorage.clear();
-    location.reload();
-}
-
-buttonReset.addEventListener('click', resetGame);
-buttonClear.addEventListener('click', clearGame);
-
-PlayerName.innerHTML = PlayerName;
-
-
-localStorage.setItem("Name", PlayerName);
-localStorage.setItem("computerPoints", computerPoints);
-localStorage.setItem("playerPoints", playerPoints);
+gameLoop();

@@ -1,55 +1,27 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Hot Dices</title>
-<link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+<meta charset="utf-8">
+<title>HOT dice</title>
 </head>
 
 <body>
-<h1>Hot</h1>
-<h2>Dices Game</h2>
-	
+<h2 id="pName"></h2>
+<p>Dice 1= <span id="dice1"></span></p>
+<p>Dice 2= <span id="dice2"></span></p>
+<p>Result is <span id="pResult"></span></p>
+<hr>
+<h2>Computer</h2>
+<p>Dice 1= <span id="dice3"></span></p>
+<p>Dice 2= <span id="dice4"></span></p>
+<p>Result is <span id="cResult"></span></p>
+<hr>
+<p id="winLoose"></p>
+<p>Your score: <span id="pScore"></span></p>
+<p>Computer score: <span id="cScore"></span></p>
+<button id="playAgain">Play again?</button>
+<p><button id="clearData">Clear all data</button></p>
 
-    <div id="player"></div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-        	<h3>Player</h3>
-        	<div id="playerDice1">Dice 1: </div>
-        	<div id="playerDice2">Dice 2: </div>
-        	<div id="playerResult">Result: </div>
-        	<div id="playerPoints">Points: </div>
-            </div>
-        </div>
-	</div>
-    
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-            	<h3>Computer</h3>
-            	<div id="computer"></div>
-            	<div id="computerDice1">Dice 1: </div>
-            	<div id="computerDice2">Dice 2: </div>
-            	<div id="computerResult">Result: </div>
-            	<div id="computerPoints">Points: </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h4 id="resultScore">Result</h4>
-                <button id="buttonReset">Play again</button>
-                <button id="buttonClear">Clear Game</button>
-            </div>
-        </div>
-    </div>
-    
-<script src="dices.js" type="text/javascript"></script>
-
+<script src="04_hot_dice.js"></script>
 </body>
 </html>
